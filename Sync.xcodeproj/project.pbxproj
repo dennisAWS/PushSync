@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F057673A206A1D2C0039DBE9 /* guns.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F0576739206A1D2C0039DBE9 /* guns.mp3 */; };
+		F057673C206A1E600039DBE9 /* OhYeah.aiff in Resources */ = {isa = PBXBuildFile; fileRef = F057673B206A1E600039DBE9 /* OhYeah.aiff */; };
 		F09CEDE920636EB500BCEF5A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09CEDE820636EB500BCEF5A /* AppDelegate.swift */; };
 		F09CEDEB20636EB500BCEF5A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09CEDEA20636EB500BCEF5A /* ViewController.swift */; };
 		F09CEDEE20636EB500BCEF5A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F09CEDEC20636EB500BCEF5A /* Main.storyboard */; };
@@ -15,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F0576739206A1D2C0039DBE9 /* guns.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = guns.mp3; sourceTree = "<group>"; };
+		F057673B206A1E600039DBE9 /* OhYeah.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = OhYeah.aiff; sourceTree = "<group>"; };
 		F09CEDE520636EB500BCEF5A /* Sync.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sync.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F09CEDE820636EB500BCEF5A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F09CEDEA20636EB500BCEF5A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -55,6 +59,8 @@
 		F09CEDE720636EB500BCEF5A /* Sync */ = {
 			isa = PBXGroup;
 			children = (
+				F057673B206A1E600039DBE9 /* OhYeah.aiff */,
+				F0576739206A1D2C0039DBE9 /* guns.mp3 */,
 				F09CEDFA20636EC700BCEF5A /* Sync.entitlements */,
 				F09CEDE820636EB500BCEF5A /* AppDelegate.swift */,
 				F09CEDEA20636EB500BCEF5A /* ViewController.swift */,
@@ -136,6 +142,8 @@
 				F09CEDF320636EB500BCEF5A /* LaunchScreen.storyboard in Resources */,
 				F09CEDF020636EB500BCEF5A /* Assets.xcassets in Resources */,
 				F09CEDEE20636EB500BCEF5A /* Main.storyboard in Resources */,
+				F057673C206A1E600039DBE9 /* OhYeah.aiff in Resources */,
+				F057673A206A1D2C0039DBE9 /* guns.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
