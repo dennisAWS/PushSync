@@ -19,21 +19,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Register for push notifications
         registerForRemoteNotifications()
-        
+            
         // Push Notification
         // If your app wasn’t running and the user launches it by tapping the push notification, the push notification is passed to your app
         // Check if app was launched from notification
-        // 1 - Check if this a remote push notification by checking if UIApplicationLaunchOptionsKey.remoteNotification exists in launch
+        // 1 - Check if this is a remote push notification by checking if UIApplicationLaunchOptionsKey.remoteNotification exists in launch
         if let notification = launchOptions?[.remoteNotification] as? [String: AnyObject] {
             // 2 - If this IS a remote push notification, get the aps dictionary (which should be the exact aps payload you sent)
             let aps = notification["aps"] as! [String: AnyObject]
+            let data = notification["data"] as! [String: AnyObject]
             
             // Play sound?
             if let mySoundFile : String = aps["sound"] as? String {
                 playSound(fileName: mySoundFile)
             }
             
-            print("(didFinishLaunchingWithOptions) aps: \(aps)")
+            print("(didFinishLaunchingWithOptions) aps: \(aps)\(data)")
         }
         
         // Always clear the push badges
@@ -76,7 +77,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             } else {
                 print("User has disabled push push notifications")
                 
-                //guard granted else { return } //ADD BACK IN?
                 self.checkPushNotificationSettings() // completionHandler:
             }
         }
@@ -97,17 +97,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // If app was running either in the foreground or background and a push notification is received
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         
-        let aps = userInfo["aps"] as! [String: AnyObject]
-        
-        // Play sound?
-        if let mySoundFile : String = aps["sound"] as? String {
-            playSound(fileName: mySoundFile)
+        // "customData":{"campaignId":"123456","keyName":"someValue"} OR (ESCAPED for SNS) \"customData\":{\"campaignId\":\"123456\",\"keyName\":\"someValue\"}
+        // Looking for custom data "customData" key in the payload.
+        if let data = userInfo["customData"] as? NSDictionary {
+            print("Custom data: \(data)")
         }
         
-        // Always clear badge
-        application.applicationIconBadgeNumber = 0;
+        if let apsDict = userInfo["aps"] as? NSDictionary {
+            print(apsDict)
+        }
         
-        print("(didReceiveRemoteNotification) Received a remote push notification: \(aps)")
+        let aps = userInfo["aps"] as! [String: AnyObject]
+        
+        // Is silent push?
+        if aps["content-available"] as? Int == 1 {
+            print("Received Silent Push: \(aps)")
+            
+            // Make network call then call completionHandler (you have 30 seconds...GO!)
+            
+            completionHandler(UIBackgroundFetchResult.noData)
+        }
+        else
+        {
+            // Play sound?
+            if let mySoundFile : String = aps["sound"] as? String {
+                playSound(fileName: mySoundFile)
+            }
+            
+            // Always clear badge
+            application.applicationIconBadgeNumber = 0;
+            
+            print("(didReceiveRemoteNotification) Received a remote push notification: \(aps)")
+        }
     }
     
     /// Push Notifications - Callback for when device has SUCCESSFULLY registered with Apple for Push Notifications
